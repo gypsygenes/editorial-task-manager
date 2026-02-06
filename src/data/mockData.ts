@@ -7,7 +7,7 @@ export const projects: Project[] = [
 ]
 
 export const columns: Column[] = [
-  { id: 'todo', title: 'To Do', color: 'bg-vermillion' },
+  { id: 'todo', title: 'To Do', color: 'bg-orange-400' },
   { id: 'in-progress', title: 'In Progress', color: 'bg-amber-400' },
   { id: 'done', title: 'Done', color: 'bg-sage' },
 ]

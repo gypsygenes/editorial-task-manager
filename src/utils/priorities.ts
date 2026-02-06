@@ -14,8 +14,8 @@ export const priorityConfig: Record<Priority, PriorityConfig> = {
   },
   high: {
     label: 'High',
-    color: 'text-vermillion',
-    bg: 'bg-vermillion/20',
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/20',
   },
   medium: {
     label: 'Medium',

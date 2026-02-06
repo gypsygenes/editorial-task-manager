@@ -8,6 +8,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <title>Editorial — Task Manager</title>
+    <script>
+      (function() {
+        try {
+          var stored = JSON.parse(localStorage.getItem('editorial-theme') || '{}');
+          var mode = stored.mode || 'dark';
+          var accent = stored.accent || 'vermillion';
+          var isDark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', isDark);
+          document.documentElement.classList.toggle('light', !isDark);
+          document.documentElement.setAttribute('data-accent', accent);
+        } catch(e) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-accent', 'vermillion');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,19 +1,43 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        charcoal: '#1a1a1a',
-        cream: '#f5f0e8',
-        'cream-dark': '#e8e0d4',
-        vermillion: '#ff4d00',
-        'vermillion-dark': '#e64400',
+        /* Semantic background tokens */
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        tertiary: 'rgb(var(--color-tertiary) / <alpha-value>)',
+        'card-bg': 'rgb(var(--color-card-bg) / <alpha-value>)',
+
+        /* Semantic text tokens */
+        'text-primary': 'rgb(var(--color-text-primary) / <alpha-value>)',
+        'text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
+        'text-muted': 'rgb(var(--color-text-muted) / <alpha-value>)',
+        'text-hint': 'rgb(var(--color-text-hint) / <alpha-value>)',
+        'text-ghost': 'rgb(var(--color-text-ghost) / <alpha-value>)',
+
+        /* Card text tokens */
+        'card-text': 'rgb(var(--color-card-text) / <alpha-value>)',
+        'card-text-secondary': 'rgb(var(--color-card-text-secondary) / <alpha-value>)',
+        'card-text-muted': 'rgb(var(--color-card-text-muted) / <alpha-value>)',
+        'card-text-hint': 'rgb(var(--color-card-text-hint) / <alpha-value>)',
+
+        /* Border & overlay tokens */
+        border: 'rgb(var(--color-border) / <alpha-value>)',
+        'border-subtle': 'rgb(var(--color-border-subtle) / <alpha-value>)',
+        overlay: 'rgb(var(--color-overlay) / <alpha-value>)',
+
+        /* Accent tokens */
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        'accent-hover': 'rgb(var(--color-accent-hover) / <alpha-value>)',
+        'accent-muted': 'rgb(var(--color-accent-muted) / <alpha-value>)',
+        'accent-focus': 'rgb(var(--color-accent-focus) / <alpha-value>)',
+
+        /* Fixed status colors (not theme-dependent) */
         sage: '#7a9e7e',
         'sage-light': '#8fb893',
-        'surface': '#242424',
-        'surface-light': '#2e2e2e',
-        'border-subtle': '#333333',
       },
       fontFamily: {
         serif: ['"Instrument Serif"', 'Georgia', 'serif'],
@@ -44,9 +68,9 @@ export default {
         'scale-in': 'scaleIn 0.2s ease-out',
       },
       boxShadow: {
-        'editorial': '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-        'editorial-hover': '0 4px 12px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12)',
-        'editorial-lg': '0 10px 40px rgba(0,0,0,0.3)',
+        'editorial': 'var(--shadow-editorial)',
+        'editorial-hover': 'var(--shadow-editorial-hover)',
+        'editorial-lg': 'var(--shadow-editorial-lg)',
       },
     },
   },

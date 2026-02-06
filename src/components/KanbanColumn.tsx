@@ -18,15 +18,15 @@ export function KanbanColumn({ column, tasks, onTaskClick, onAddTask }: KanbanCo
       <div className="flex items-center justify-between mb-4 px-1">
         <div className="flex items-center gap-3">
           <div className={`w-2 h-2 rounded-full ${column.color}`} />
-          <h3 className="text-sm font-semibold text-cream/70 uppercase tracking-wider">
+          <h3 className="text-sm font-semibold text-text-secondary/70 uppercase tracking-wider">
             {column.title}
           </h3>
-          <span className="text-xs text-cream/25 font-mono">{tasks.length}</span>
+          <span className="text-xs text-text-ghost font-mono">{tasks.length}</span>
         </div>
         {onAddTask && (
           <button
             onClick={onAddTask}
-            className="p-1 rounded-md text-cream/20 hover:text-cream/50 hover:bg-cream/5 transition-colors"
+            className="p-1 rounded-md text-text-ghost hover:text-text-muted hover:bg-text-primary/5 transition-colors"
           >
             <Plus size={14} />
           </button>
@@ -40,7 +40,7 @@ export function KanbanColumn({ column, tasks, onTaskClick, onAddTask }: KanbanCo
             ref={provided.innerRef}
             {...provided.droppableProps}
             className={`space-y-3 min-h-[200px] p-2 rounded-xl transition-colors duration-200 ${
-              snapshot.isDraggingOver ? 'bg-cream/5' : ''
+              snapshot.isDraggingOver ? 'bg-text-primary/5' : ''
             }`}
           >
             <AnimatePresence mode="popLayout">

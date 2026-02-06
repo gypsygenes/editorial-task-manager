@@ -37,7 +37,7 @@ export function TaskCard({ task, index, onClick }: TaskCardProps) {
           {task.tags.slice(0, 2).map(tag => (
             <span
               key={tag}
-              className="text-[10px] uppercase tracking-wider text-charcoal/40 font-medium"
+              className="text-[10px] uppercase tracking-wider text-card-text-hint font-medium"
             >
               {tag}
             </span>
@@ -45,22 +45,22 @@ export function TaskCard({ task, index, onClick }: TaskCardProps) {
         </div>
       </div>
 
-      <h3 className="font-serif text-lg text-charcoal leading-tight mb-2 group-hover:text-vermillion transition-colors">
+      <h3 className="font-serif text-lg text-card-text leading-tight mb-2 group-hover:text-accent transition-colors">
         {task.title}
       </h3>
 
-      <p className="text-xs text-charcoal/50 leading-relaxed mb-3 line-clamp-2">
+      <p className="text-xs text-card-text-muted leading-relaxed mb-3 line-clamp-2">
         {task.description}
       </p>
 
-      <div className="flex items-center justify-between pt-2 border-t border-charcoal/10">
+      <div className="flex items-center justify-between pt-2 border-t border-card-text/10">
         <div className="flex items-center gap-1.5">
-          <div className="w-5 h-5 rounded-full bg-charcoal/10 flex items-center justify-center">
-            <span className="text-[9px] font-bold text-charcoal/60">{initials}</span>
+          <div className="w-5 h-5 rounded-full bg-card-text/10 flex items-center justify-center">
+            <span className="text-[9px] font-bold text-card-text-muted">{initials}</span>
           </div>
-          <span className="text-[11px] text-charcoal/40">{task.assignee.split(' ')[0]}</span>
+          <span className="text-[11px] text-card-text-hint">{task.assignee.split(' ')[0]}</span>
         </div>
-        <div className="flex items-center gap-1 text-charcoal/35">
+        <div className="flex items-center gap-1 text-card-text-hint">
           <Calendar size={11} />
           <span className="text-[11px]">
             {format(parseISO(task.dueDate), 'MMM d')}

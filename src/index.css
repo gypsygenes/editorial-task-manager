@@ -3,8 +3,111 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Light mode (default) ── */
+  :root {
+    /* Backgrounds */
+    --color-primary: 250 245 235;
+    --color-secondary: 240 235 225;
+    --color-tertiary: 232 227 217;
+    --color-card-bg: 245 240 232;
+
+    /* Text */
+    --color-text-primary: 30 30 30;
+    --color-text-secondary: 60 58 53;
+    --color-text-muted: 100 96 88;
+    --color-text-hint: 140 136 128;
+    --color-text-ghost: 180 176 168;
+
+    /* Card text */
+    --color-card-text: 26 26 26;
+    --color-card-text-secondary: 60 58 53;
+    --color-card-text-muted: 100 96 88;
+    --color-card-text-hint: 140 136 128;
+
+    /* Borders & overlays */
+    --color-border: 210 205 195;
+    --color-border-subtle: 220 215 205;
+    --color-overlay: 0 0 0;
+
+    /* Shadows */
+    --shadow-editorial: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.08);
+    --shadow-editorial-hover: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.06);
+    --shadow-editorial-lg: 0 10px 40px rgba(0,0,0,0.12);
+
+    /* Paper texture */
+    --paper-bg: #f5f0e8;
+    --noise-opacity: 0.025;
+  }
+
+  /* ── Dark mode ── */
+  .dark {
+    --color-primary: 26 26 26;
+    --color-secondary: 36 36 36;
+    --color-tertiary: 46 46 46;
+    --color-card-bg: 245 240 232;
+
+    --color-text-primary: 245 240 232;
+    --color-text-secondary: 245 240 232;
+    --color-text-muted: 245 240 232;
+    --color-text-hint: 245 240 232;
+    --color-text-ghost: 245 240 232;
+
+    --color-card-text: 26 26 26;
+    --color-card-text-secondary: 60 58 53;
+    --color-card-text-muted: 100 96 88;
+    --color-card-text-hint: 140 136 128;
+
+    --color-border: 60 60 60;
+    --color-border-subtle: 51 51 51;
+    --color-overlay: 0 0 0;
+
+    --shadow-editorial: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --shadow-editorial-hover: 0 4px 12px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12);
+    --shadow-editorial-lg: 0 10px 40px rgba(0,0,0,0.3);
+
+    --paper-bg: #f5f0e8;
+    --noise-opacity: 0.03;
+  }
+
+  /* ── Accent themes ── */
+  :root,
+  [data-accent="vermillion"] {
+    --color-accent: 255 77 0;
+    --color-accent-hover: 230 68 0;
+    --color-accent-muted: 255 77 0;
+    --color-accent-focus: 255 77 0;
+  }
+
+  [data-accent="ocean"] {
+    --color-accent: 37 99 235;
+    --color-accent-hover: 29 78 216;
+    --color-accent-muted: 37 99 235;
+    --color-accent-focus: 37 99 235;
+  }
+
+  [data-accent="amethyst"] {
+    --color-accent: 139 92 246;
+    --color-accent-hover: 124 58 237;
+    --color-accent-muted: 139 92 246;
+    --color-accent-focus: 139 92 246;
+  }
+
+  [data-accent="rose"] {
+    --color-accent: 225 29 72;
+    --color-accent-hover: 190 18 60;
+    --color-accent-muted: 225 29 72;
+    --color-accent-focus: 225 29 72;
+  }
+
+  [data-accent="emerald"] {
+    --color-accent: 5 150 105;
+    --color-accent-hover: 4 120 87;
+    --color-accent-muted: 5 150 105;
+    --color-accent-focus: 5 150 105;
+  }
+
   body {
-    @apply bg-charcoal text-cream font-sans antialiased;
+    @apply bg-primary text-text-primary font-sans antialiased;
     margin: 0;
     min-height: 100vh;
   }
@@ -21,16 +124,37 @@
     inset: 0;
     z-index: 9999;
     pointer-events: none;
-    opacity: 0.03;
+    opacity: var(--noise-opacity);
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 256px 256px;
+  }
+
+  /* Global theme transition */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, box-shadow;
+    transition-duration: 200ms;
+    transition-timing-function: ease;
+  }
+
+  /* Don't transition animations/transforms */
+  [class*="animate-"],
+  [class*="transition-"] {
+    transition-property: all;
+  }
+
+  /* Dark mode form controls */
+  .dark select,
+  .dark input[type="date"] {
+    color-scheme: dark;
   }
 }
 
 @layer components {
   .paper-texture {
-    background-color: #f5f0e8;
+    background-color: var(--paper-bg);
     background-image:
       radial-gradient(ellipse at 20% 50%, rgba(0,0,0,0.02) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 50%, rgba(0,0,0,0.015) 0%, transparent 50%);
