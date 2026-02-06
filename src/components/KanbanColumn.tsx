@@ -1,17 +1,32 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd'
 import { Plus } from 'lucide-react'
 import { AnimatePresence } from 'framer-motion'
-import { Task, Column } from '../types'
+import type { DBColumn, DBTask, DBLabel } from '../types/database'
 import { TaskCard } from './TaskCard'
 
 interface KanbanColumnProps {
-  column: Column
-  tasks: Task[]
-  onTaskClick: (task: Task) => void
+  column: DBColumn
+  tasks: DBTask[]
+  onTaskClick: (taskId: number) => void
   onAddTask?: () => void
+  selectedTaskIds: Set<number>
+  onToggleTaskSelection: (taskId: number) => void
+  labels: DBLabel[]
 }
 
-export function KanbanColumn({ column, tasks, onTaskClick, onAddTask }: KanbanColumnProps) {
+export function KanbanColumn({
+  column,
+  tasks,
+  onTaskClick,
+  onAddTask,
+  selectedTaskIds,
+  onToggleTaskSelection,
+  labels,
+}: KanbanColumnProps) {
+  const wipLimit = column.limit
+  const isOverLimit = wipLimit !== null && tasks.length > wipLimit
+  const isAtLimit = wipLimit !== null && tasks.length === wipLimit
+
   return (
     <div className="flex-1 min-w-[300px] max-w-[400px]">
       {/* Column Header */}
@@ -21,7 +36,11 @@ export function KanbanColumn({ column, tasks, onTaskClick, onAddTask }: KanbanCo
           <h3 className="text-sm font-semibold text-text-secondary/70 uppercase tracking-wider">
             {column.title}
           </h3>
-          <span className="text-xs text-text-ghost font-mono">{tasks.length}</span>
+          <span className={`text-xs font-mono ${
+            isOverLimit ? 'text-red-400' : isAtLimit ? 'text-amber-400' : 'text-text-ghost'
+          }`}>
+            {tasks.length}{wipLimit !== null ? `/${wipLimit}` : ''}
+          </span>
         </div>
         {onAddTask && (
           <button
@@ -34,7 +53,7 @@ export function KanbanColumn({ column, tasks, onTaskClick, onAddTask }: KanbanCo
       </div>
 
       {/* Droppable Area */}
-      <Droppable droppableId={column.id}>
+      <Droppable droppableId={String(column.id)}>
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
@@ -45,7 +64,7 @@ export function KanbanColumn({ column, tasks, onTaskClick, onAddTask }: KanbanCo
           >
             <AnimatePresence mode="popLayout">
               {tasks.map((task, index) => (
-                <Draggable key={task.id} draggableId={task.id} index={index}>
+                <Draggable key={task.id} draggableId={String(task.id)} index={index}>
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -57,7 +76,10 @@ export function KanbanColumn({ column, tasks, onTaskClick, onAddTask }: KanbanCo
                       <TaskCard
                         task={task}
                         index={index}
-                        onClick={() => onTaskClick(task)}
+                        onClick={() => onTaskClick(task.id!)}
+                        isSelected={selectedTaskIds.has(task.id!)}
+                        onToggleSelect={() => onToggleTaskSelection(task.id!)}
+                        labels={labels.filter(l => task.labelIds.includes(l.id!))}
                       />
                     </div>
                   )}

@@ -1,6 +1,6 @@
 export type Priority = 'urgent' | 'high' | 'medium' | 'low'
 export type TaskStatus = 'todo' | 'in-progress' | 'done'
-export type ViewMode = 'kanban' | 'list'
+export type ViewMode = 'kanban' | 'list' | 'calendar' | 'timeline'
 
 export interface Task {
   id: string
